@@ -19,3 +19,11 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+data class Point(
+    val x: Int,
+    val y: Int,
+) {
+    operator fun minus(other: Point) = Point(x - other.x, y - other.y)
+    operator fun plus(other: Point) = Point(x + other.x, y + other.y)
+}
