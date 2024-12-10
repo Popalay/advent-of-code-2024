@@ -11,9 +11,10 @@ fun readInput(name: String) = Path("src/$name.txt").readText().trim().lines()
 /**
  * Converts string to md5 hash.
  */
-fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
-    .toString(16)
-    .padStart(32, '0')
+fun String.md5() =
+    BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+        .toString(16)
+        .padStart(32, '0')
 
 /**
  * The cleaner shorthand for printing output.
@@ -25,5 +26,17 @@ data class Point(
     val y: Int,
 ) {
     operator fun minus(other: Point) = Point(x - other.x, y - other.y)
+
     operator fun plus(other: Point) = Point(x + other.x, y + other.y)
 }
+
+enum class Direction(
+    val div: Point,
+) {
+    UP(Point(0, -1)),
+    DOWN(Point(0, 1)),
+    LEFT(Point(-1, 0)),
+    RIGHT(Point(1, 0)),
+}
+
+operator fun List<List<Int>>.get(point: Point): Int? = this.getOrNull(point.y)?.getOrNull(point.x)
