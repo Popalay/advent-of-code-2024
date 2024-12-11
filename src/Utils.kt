@@ -2,6 +2,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readText
+import kotlin.math.log10
 
 /**
  * Reads lines from the given input txt file.
@@ -40,3 +41,5 @@ enum class Direction(
 }
 
 operator fun List<List<Int>>.get(point: Point): Int? = this.getOrNull(point.y)?.getOrNull(point.x)
+
+fun digitCount(num: Long): Int = if (num == 0L) 1 else log10(num.toDouble()).toInt() + 1
